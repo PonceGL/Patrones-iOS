@@ -11,7 +11,10 @@ import SwiftData
 struct ContentView: View {
 
     var body: some View {
-        Text("Pokedex SwiftUI")
+        VStack {
+            Text("Pokedex SwiftUI")
+            PokemonListView()
+        }
     }
 }
 
