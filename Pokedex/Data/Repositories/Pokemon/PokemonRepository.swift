@@ -9,5 +9,5 @@ import Foundation
 
 protocol PokemonRepository {
     func fetchListPokemons() async throws -> PokemonListResponse
-    func fetchDetailsPokemon(name: String) async throws -> PokemonDetails
+    func fetchDetailsPokemon(id: String) async throws -> PokemonDetails
 }

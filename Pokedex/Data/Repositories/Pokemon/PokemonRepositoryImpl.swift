@@ -19,8 +19,8 @@ final class PokemonRepositoryImpl: PokemonRepository {
         return response
     }
     
-    func fetchDetailsPokemon(name: String) async throws -> PokemonDetails {
-        let response: PokemonDetails = try await apiClient.request(endpoint: .detailsPokemon(name: name))
+    func fetchDetailsPokemon(id: String) async throws -> PokemonDetails {
+        let response: PokemonDetails = try await apiClient.request(endpoint: .detailsPokemon(id: id))
         return response
     }
 }

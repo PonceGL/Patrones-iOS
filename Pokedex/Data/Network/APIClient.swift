@@ -17,8 +17,15 @@ final class APIClient {
             throw URLError(.badServerResponse)
         }
         
+
+//        let decoder = JSONDecoder()
+//        return try decoder.decode(T.self, from: data)
+        
         let decoder = JSONDecoder()
+        decoder.keyDecodingStrategy = .convertFromSnakeCase
         return try decoder.decode(T.self, from: data)
+        
+        
     }
         
 }

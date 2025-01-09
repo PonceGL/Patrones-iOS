@@ -14,7 +14,7 @@ enum HTTPMethod: String {
 
 enum Endpoint {
     case listPokemons
-    case detailsPokemon(name: String)
+    case detailsPokemon(id: String)
     
     var url: URL {
         let baseURL = "https://pokeapi.co/api/v2"

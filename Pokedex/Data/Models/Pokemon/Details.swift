@@ -11,7 +11,7 @@ struct PokemonDetails: Codable {
     let id: Int
     let name: String
     let sprites: Sprites
-    let types: Types
+    let types: [Types]
 }
 
 struct Sprites: Codable {
@@ -25,10 +25,10 @@ struct Other : Codable {
         case officialArtwork = "official-artwork"
     }
 
-    init(from decoder: Decoder) throws {
-        let values = try decoder.container(keyedBy: CodingKeys.self)
-        self.officialArtwork = try values.decodeIfPresent(OfficialArtwork.self, forKey: .officialArtwork)
-    }
+//    init(from decoder: Decoder) throws {
+//        let values = try decoder.container(keyedBy: CodingKeys.self)
+//        self.officialArtwork = try values.decodeIfPresent(OfficialArtwork.self, forKey: .officialArtwork)
+//    }
 
 }
 
@@ -42,11 +42,11 @@ struct OfficialArtwork : Codable {
         case frontShiny = "front_shiny"
     }
 
-    init(from decoder: Decoder) throws {
-        let values = try decoder.container(keyedBy: CodingKeys.self)
-        self.frontDefault = try values.decodeIfPresent(String.self, forKey: .frontDefault)
-        self.frontShiny = try values.decodeIfPresent(String.self, forKey: .frontShiny)
-    }
+//    init(from decoder: Decoder) throws {
+//        let values = try decoder.container(keyedBy: CodingKeys.self)
+//        self.frontDefault = try values.decodeIfPresent(String.self, forKey: .frontDefault)
+//        self.frontShiny = try values.decodeIfPresent(String.self, forKey: .frontShiny)
+//    }
 
 }
 

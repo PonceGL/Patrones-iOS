@@ -8,24 +8,28 @@
 import Foundation
 
 final class PokemonListViewModel: ObservableObject {
-    @Published var response: PokemonListResponse? = nil
-    private let getPokemonsListUseCase: GetPokemonListUseCaseProtocol
+    @Published var pokemonList: [PokemonDetails] = []
+    private let getPokemonDetailsUseCase: GetPokemonDetailsUseCaseProtocol
+    private let limit: Int = 20
     
-    init(getPokemonsListUseCase: GetPokemonListUseCaseProtocol = GetPokemonListUseCase()) {
-        self.getPokemonsListUseCase = getPokemonsListUseCase
+    
+    init(getPokemonDetailsUseCase: GetPokemonDetailsUseCaseProtocol = GetPokemonDetailsUseCase()) {
+        self.getPokemonDetailsUseCase = getPokemonDetailsUseCase
+    }
+    
+    func getPokemonDetails(id: String) async throws -> PokemonDetails {
+        let response = try await getPokemonDetailsUseCase.execute(id: id)
+        return response
     }
     
     func loadPokemonList(){
         Task {
             do {
-                let response = try await getPokemonsListUseCase.execute()
-                print("======================")
-                print("loadPokemonList response")
-                print("\(response)")
-                print("======================")
-                
-                await MainActor.run {
-                    self.response = response
+                for index in 1...limit {
+                    let response = try await getPokemonDetails(id: String(describing: index))
+                    DispatchQueue.main.async {
+                        self.pokemonList.append(response)
+                    }
                 }
             } catch {
                 print(error)
@@ -33,3 +37,4 @@ final class PokemonListViewModel: ObservableObject {
         }
     }
 }
+
