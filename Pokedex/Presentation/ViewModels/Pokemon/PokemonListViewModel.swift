@@ -12,7 +12,6 @@ final class PokemonListViewModel: ObservableObject {
     private let getPokemonDetailsUseCase: GetPokemonDetailsUseCaseProtocol
     private let limit: Int = 20
     
-    
     init(getPokemonDetailsUseCase: GetPokemonDetailsUseCaseProtocol = GetPokemonDetailsUseCase()) {
         self.getPokemonDetailsUseCase = getPokemonDetailsUseCase
     }
@@ -31,6 +30,11 @@ final class PokemonListViewModel: ObservableObject {
                         self.pokemonList.append(response)
                     }
                 }
+                
+                print("======================")
+                print("loadPokemonList response")
+                print("\(String(describing: self.pokemonList.first))")
+                print("======================")
             } catch {
                 print(error)
             }

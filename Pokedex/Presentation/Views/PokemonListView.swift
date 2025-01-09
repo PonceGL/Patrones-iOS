@@ -9,15 +9,20 @@ import SwiftUI
 
 struct PokemonListView: View {
     @StateObject private var viewModel = PokemonListViewModel()
-    
-//    private let pokemonSorted = viewModel.pokemonList.sorted {$0.id < $1.id}
+    let columns = [
+        GridItem(.flexible()),
+        GridItem(.flexible())
+    ]
     
     var body: some View {
-        List(viewModel.pokemonList.sorted {$0.id < $1.id}, id: \.name) { pokemon in
-            Text(pokemon.name)
-                .listRowSeparator(.hidden)
+        ScrollView {
+            LazyVGrid(columns: columns, spacing: 16) {
+                ForEach(viewModel.pokemonList.sorted { $0.id < $1.id }) { pokemon in
+                    PokemonCardView(pokemon: pokemon)
+                }
+            }
+            .padding()
         }
-        .listStyle(.plain)
         .onAppear {
             Task {
                 viewModel.loadPokemonList()
